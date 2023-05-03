@@ -12,3 +12,7 @@
  *
  *= require_self
  */
+
+.notice {
+  color: black;
+}
