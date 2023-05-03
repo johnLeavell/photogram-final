@@ -43,7 +43,7 @@
     <table border="1">
       <tr>
         <th>
-          ID
+          Image
         </th>
 
         <th>
@@ -51,37 +51,25 @@
         </th>
 
         <th>
-          Comments count
-        </th>
-
-        <th>
-          Image
-        </th>
-
-        <th>
-          Likes count
-        </th>
-
-        <th>
           Owner
         </th>
 
         <th>
-          Created at
+          Posted
         </th>
 
         <th>
-          Updated at
-        </th>
-
-        <th>
+          Likes
         </th>
       </tr>
 
       <% @list_of_photos.each do |a_photo| %>
+      <%= @list_of_photos.inspect 
+      %>
       <tr>
         <td>
-          <%= a_photo.id %>
+          <%= a_photo.image %>
+
         </td>
 
         <td>
@@ -89,26 +77,17 @@
         </td>
 
         <td>
-          <%= a_photo.comments_count %>
-        </td>
-
-        <td>
-          <%= a_photo.image %>
+          <%= a_photo.id %>
         </td>
 
         <td>
           <%= a_photo.likes_count %>
         </td>
 
-        <td>
-          <%= a_photo.owner_id %>
-        </td>
+        
 
         <td>
           <%= time_ago_in_words(a_photo.created_at) %> ago
-        </td>
-        <td>
-          <%= time_ago_in_words(a_photo.updated_at) %> ago
         </td>
 
         <td>
