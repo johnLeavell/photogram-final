@@ -1,4 +1,6 @@
 class PhotosController < ApplicationController
+  skip_before_action(:force_user_sign_in, { :only => [:index] })
+
   def index
     matching_photos = Photo.all
 
@@ -14,15 +16,15 @@ class PhotosController < ApplicationController
 
     @the_photo = matching_photos.at(0)
 
+    @the_like = Like.where({ :fan_id => @current_user.id, :photo_id => @the_photo.id}).first
+
     render({ :template => "photos/show.html.erb" })
   end
 
   def create
     the_photo = Photo.new
     the_photo.caption = params.fetch("query_caption")
-    the_photo.comments_count = params.fetch("query_comments_count")
     the_photo.image = params.fetch("query_image")
-    the_photo.likes_count = params.fetch("query_likes_count")
     the_photo.owner_id = params.fetch("query_owner_id")
 
     if the_photo.valid?
@@ -38,9 +40,7 @@ class PhotosController < ApplicationController
     the_photo = Photo.where({ :id => the_id }).at(0)
 
     the_photo.caption = params.fetch("query_caption")
-    the_photo.comments_count = params.fetch("query_comments_count")
     the_photo.image = params.fetch("query_image")
-    the_photo.likes_count = params.fetch("query_likes_count")
     the_photo.owner_id = params.fetch("query_owner_id")
 
     if the_photo.valid?
